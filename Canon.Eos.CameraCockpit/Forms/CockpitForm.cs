@@ -144,13 +144,13 @@ namespace Canon.Eos.CameraCockpit.Forms
             _manager.ReleaseFramework();
         }
 
-        private void UpdatePicture(Image image)
-        {
-            if (this.InvokeRequired)
-                this.Invoke(new Action(() => this.UpdatePicture(image)));
-            else
-                _pictureBox.Image = image;
-        }
+            private void UpdatePicture(Image image)
+            {
+                if (this.InvokeRequired)
+                    this.Invoke(new Action(() => this.UpdatePicture(image)));
+                else
+                    _pictureBox.Image = image;
+            }
 
         private void SafeCall(Action action, Action<Exception> exceptionHandler)
         {
@@ -248,6 +248,38 @@ namespace Canon.Eos.CameraCockpit.Forms
                 _picturesOnHostLocationTextBox.Text = folderBrowserDialog1.SelectedPath;
                 _storePicturesOnCameraRadioButton_CheckedChanged(null, null);
             }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.SafeCall(() =>
+            {
+                var camera = this.GetSelectedCamera();
+                if (camera != null)
+                {
+                    camera.showSettings();
+                }
+            }, ex => MessageBox.Show(ex.ToString(), "Problem setting Savelocation", MessageBoxButtons.OK, MessageBoxIcon.Error));
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.SafeCall(() =>
+            {
+                var camera = this.GetSelectedCamera();
+                if (camera != null)
+                    camera.startVideoRecording();
+            }, ex => MessageBox.Show(ex.ToString(), Resources.RecordMovieError, MessageBoxButtons.OK, MessageBoxIcon.Error));
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.SafeCall(() =>
+            {
+                var camera = this.GetSelectedCamera();
+                if (camera != null)
+                    camera.stopVideoRecording();
+            }, ex => MessageBox.Show(ex.ToString(), Resources.RecordMovieError, MessageBoxButtons.OK, MessageBoxIcon.Error));
         }
     }
 }

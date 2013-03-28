@@ -32,6 +32,7 @@
         {
             this._pictureBox = new System.Windows.Forms.PictureBox();
             this._controlPanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this._liveViewPictureButton = new System.Windows.Forms.Button();
             this._liveViewButton = new System.Windows.Forms.Button();
             this._selectCameraLabel = new System.Windows.Forms.Label();
@@ -42,6 +43,8 @@
             this._picturesOnHostLocationTextBox = new System.Windows.Forms.TextBox();
             this._browsePicturesOnHostLocationButton = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this._pictureBox)).BeginInit();
             this._controlPanel.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +66,9 @@
             // 
             this._controlPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this._controlPanel.Controls.Add(this.button3);
+            this._controlPanel.Controls.Add(this.button2);
+            this._controlPanel.Controls.Add(this.button1);
             this._controlPanel.Controls.Add(this._liveViewPictureButton);
             this._controlPanel.Controls.Add(this._liveViewButton);
             this._controlPanel.Controls.Add(this._selectCameraLabel);
@@ -72,6 +78,16 @@
             this._controlPanel.Name = "_controlPanel";
             this._controlPanel.Size = new System.Drawing.Size(200, 504);
             this._controlPanel.TabIndex = 1;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(0, 273);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(197, 69);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Get IsoList";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // _liveViewPictureButton
             // 
@@ -163,6 +179,26 @@
             this._browsePicturesOnHostLocationButton.UseVisualStyleBackColor = true;
             this._browsePicturesOnHostLocationButton.Click += new System.EventHandler(this._browsePicturesOnHostLocationButton_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(0, 348);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(197, 69);
+            this.button2.TabIndex = 6;
+            this.button2.Text = "Record Movie";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(-1, 423);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(197, 69);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "Record Movie";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // CockpitForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -199,6 +235,9 @@
         private System.Windows.Forms.Button _liveViewButton;
         private System.Windows.Forms.Button _liveViewPictureButton;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 

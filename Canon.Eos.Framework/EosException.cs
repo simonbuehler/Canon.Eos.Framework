@@ -32,7 +32,8 @@ namespace Canon.Eos.Framework
 
         public override string Message
         {
-            get { return string.Format("{0}{1}{2}", this.EosErrorCodeMessage, Environment.NewLine, base.Message); }
+            //get { return string.Format("{0}{1}{2}", this.EosErrorCodeMessage, Environment.NewLine, base.Message); }
+             get { return  this.EosErrorCodeMessage; }
         }
     }
 }

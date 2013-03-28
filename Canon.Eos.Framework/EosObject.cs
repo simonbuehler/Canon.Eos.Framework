@@ -155,15 +155,15 @@ namespace Canon.Eos.Framework
                 }
             });
         }
-        
-        protected string GetPropertyDescription(uint propertyId)
+
+        internal Canon.Eos.Framework.Internal.SDK.Edsdk.EdsPropertyDesc GetPropertyDescription(PropertyID propertyId)
         {
             return this.ExecuteGetter(() =>
             {
                 Edsdk.EdsPropertyDesc desc;
-                Util.Assert(Edsdk.EdsGetPropertyDesc(this.Handle, propertyId, out desc),
-                    string.Format("Failed to get property description for data: propertyId {0}", propertyId), propertyId);
-                return string.Empty;
+                Util.Assert(Edsdk.EdsGetPropertyDesc(this.Handle, (uint)propertyId, out desc),
+                    string.Format("Failed to get property description for data: propertyId {0}", propertyId), (uint)propertyId);
+                return desc;
             });
         }
         

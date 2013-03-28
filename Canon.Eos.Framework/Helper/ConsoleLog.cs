@@ -43,7 +43,7 @@ namespace Canon.Eos.Framework.Helper
             stringBuilder.Append(logType);
             stringBuilder.Append("::");
             stringBuilder.AppendFormat(format, parameters);
-            Console.Error.WriteLine(stringBuilder);
+            Console.WriteLine(stringBuilder);
         }
     }
 }

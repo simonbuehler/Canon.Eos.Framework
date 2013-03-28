@@ -117,22 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="FrameworkLoadError" xml:space="preserve">
-    <value>Failed to load the framework.</value>
-  </data>
-  <data name="LiveViewNotSupportedButtonLabel" xml:space="preserve">
-    <value>Live View Not Supported</value>
-  </data>
-  <data name="RecordMovieError" xml:space="preserve">
-    <value>Failed to take Movie, Camera in Movie Mode?</value>
-  </data>
-  <data name="StartLiveViewButtonLabel" xml:space="preserve">
-    <value>Start Live View</value>
-  </data>
-  <data name="StopLiveViewButtonLabel" xml:space="preserve">
-    <value>Stop Live View</value>
-  </data>
-  <data name="TakePictureError" xml:space="preserve">
-    <value>Failed to take a picture.</value>
-  </data>
 </root>

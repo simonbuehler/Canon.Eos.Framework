@@ -4,6 +4,8 @@ using System.Runtime.InteropServices;
 using Canon.Eos.Framework.Eventing;
 using Canon.Eos.Framework.Helper;
 using Canon.Eos.Framework.Internal.SDK;
+using System.Collections.Generic;
+using Canon.Eos.Framework.Forms;
 
 namespace Canon.Eos.Framework
 {
@@ -123,6 +125,137 @@ namespace Canon.Eos.Framework
             get { return EosImageQuality.Create(this.GetPropertyIntegerData(Edsdk.PropID_ImageQuality)); }
             set { this.SetPropertyIntegerData(Edsdk.PropID_ImageQuality, value.ToBitMask()); }
         }
+
+        #region Tv
+
+        /// <summary>
+        /// A list of all available shutter speeds.
+        /// </summary>
+        public IEnumerable<String> TvList
+        {
+            get
+            {
+                return EnumHelper.FillList(GetPropertyDescription(PropertyID.Tv), typeof(EosTv));
+            }
+        }
+
+        /// <summary>
+        /// A map of all available shutter speeds.
+        /// </summary>
+        public IEnumerable<KeyValuePair<String, String>> TvMap
+        {
+            get
+            {
+                return EnumHelper.FillMap(GetPropertyDescription(PropertyID.Tv), typeof(EosTv));
+            }
+        }
+
+        /// <summary>
+        /// The shutter speed.
+        /// </summary>
+        public EosTv Tv
+        {
+
+
+            get { return (EosTv)this.GetPropertyIntegerData((uint)PropertyID.Tv); }                    
+            set { this.SetPropertyIntegerData((uint)PropertyID.Tv, (uint)value ); }
+
+        }
+
+        #endregion
+
+        #region Av
+
+        /// <summary>
+        /// A list of all available aperture values.
+        /// </summary>
+        public IEnumerable<String> AvList
+        {
+            get
+            {
+                return EnumHelper.FillList(GetPropertyDescription(PropertyID.Av), typeof(EosAv));
+            }
+        }
+
+        /// <summary>
+        /// A map of all available aperture values.
+        /// </summary>
+        public IEnumerable<KeyValuePair<String, String>> AvMap
+        {
+            get
+            {
+                return EnumHelper.FillMap(GetPropertyDescription(PropertyID.Av), typeof(EosAv));
+            }
+        }
+
+        /// <summary>
+        /// The camera's aperture value.
+        /// </summary>
+        public EosAv Av
+        {
+
+            get { return (EosAv)this.GetPropertyIntegerData((uint)PropertyID.Av); }                    
+            set { this.SetPropertyIntegerData((uint)PropertyID.Av, (uint)value ); }
+
+        }
+
+        #endregion
+
+        #region ISO
+
+        /// <summary>
+        /// A list of all available ISO sensitivities.
+        /// </summary>
+        public IEnumerable<String> ISOList
+        {
+            get
+            {
+                return EnumHelper.FillList(GetPropertyDescription(PropertyID.ISO), typeof(EosISO));
+            }
+        }
+
+        /// <summary>
+        /// A map of all available ISO sensitivities.
+        /// </summary>
+        public IEnumerable<KeyValuePair<String, String>> ISOMap
+        {
+            get
+            {
+                return EnumHelper.FillMap(GetPropertyDescription(PropertyID.ISO), typeof(EosISO));
+            }
+        }
+
+        /// <summary>
+        /// ISO sensitivity.
+        /// </summary>
+        public EosISO ISO
+        {
+
+            
+            get { return (EosISO)this.GetPropertyIntegerData((uint)PropertyID.ISO); }                    
+            set { this.SetPropertyIntegerData((uint)PropertyID.ISO, (uint)value ); }
+
+        }
+
+        #endregion
+
+
+        #region AEMode
+
+        /// <summary>
+        /// The capture program.
+        /// </summary>
+        public EosAEMode AEMode
+        {
+
+            get { return (EosAEMode)this.GetPropertyIntegerData((uint)PropertyID.AEMode ); }                    
+            set { this.SetPropertyIntegerData((uint)PropertyID.AEMode, (uint)value ); }
+           
+
+        }
+
+        #endregion
+
 
         public bool IsErrorTolerantMode { get; set; }
 
@@ -428,6 +561,20 @@ namespace Canon.Eos.Framework
                 _edsPropertyEventHandler, IntPtr.Zero), "Failed to set object handler.");            
         }
 
+        public void startVideoRecording()
+        {
+            Util.Assert((AEMode == EosAEMode.Movie? (uint)0:(uint)1), "AEMode must be set to 'movie'");
+            SavePicturesToCamera();
+            this.SetPropertyIntegerData(Edsdk.PropID_Record, Edsdk.CameraCommand_PressShutterButton);
+
+           
+        }
+
+        public void stopVideoRecording()
+        {
+            this.SetPropertyIntegerData(Edsdk.PropID_Record, Edsdk.CameraCommand_TakePicture);
+            
+        }
         /// <summary>
         /// Starts the live view.
         /// </summary>
@@ -463,6 +610,8 @@ namespace Canon.Eos.Framework
             this._cancelLiveViewRequested = true;
         }
 
+
+
         /// <summary>
         /// Takes the picture.
         /// </summary>
@@ -490,6 +639,17 @@ namespace Canon.Eos.Framework
             this._pauseLiveViewRequested = false;
 
         }
+
+        #region ShowSettings
+
+        public void showSettings()
+        {
+
+            CameraSettings csf = new CameraSettings(this);
+            csf.ShowDialog();
+
+        }
+        #endregion
 
         public override string ToString()
         {
